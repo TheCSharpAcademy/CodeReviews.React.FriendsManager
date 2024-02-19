@@ -1,0 +1,6 @@
+@FriendContact_HostAddress = http://localhost:5122
+
+GET {{FriendContact_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
