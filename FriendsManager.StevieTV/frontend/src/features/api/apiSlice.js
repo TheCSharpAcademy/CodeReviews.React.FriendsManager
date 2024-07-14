@@ -6,7 +6,7 @@ export const apiSlice = createApi({
     baseUrl: "https://localhost:7285/api" 
   }),
   // Tag types are used for caching and invalidation.
-  tagTypes: ['Friend'],
+  tagTypes: ['Friend', 'Category'],
   endpoints: (build) => ({
     getFriends: build.query({
       query: () => '/Friends',
@@ -15,9 +15,29 @@ export const apiSlice = createApi({
         ...result.map(({ id }) => ({ type: 'Friend', id }))
       ]
     }),
+    addNewFriend: build.mutation({
+      query: (newFriend) => ({
+        url: '/Friends',
+        method: 'POST',
+        body: newFriend
+      }),
+      invalidatesTags: ['Friend'],
+      onQueryStarted(arg, api) {
+        console.log(arg)
+      }
+    }),
+    getCategories: build.query({
+      query: () => '/Categories',
+      providesTags: (result = []) => [
+        'Category',
+        ...result.map(({ id }) => ({ type: 'Category', id}))
+      ]
+    }),
   }),
 })
 
 export const { 
-  useGetFriendsQuery
+  useGetFriendsQuery,
+  useAddNewFriendMutation,
+  useGetCategoriesQuery,
 } = apiSlice

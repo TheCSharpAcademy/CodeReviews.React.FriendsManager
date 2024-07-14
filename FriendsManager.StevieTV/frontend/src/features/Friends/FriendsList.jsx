@@ -1,10 +1,10 @@
-﻿import React from "react"
+import React from "react"
 import classnames from "classnames"
-import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardHeader from "@mui/material/CardHeader"
 import Avatar from "@mui/material/Avatar"
+import Box from "@mui/material/Box"
 
 import "./FriendsList.css"
 
@@ -61,11 +61,11 @@ export const FriendsList = () => {
     content = "LOADING..."
   } else if (isSuccess) {
 
-    const containterClassname = classnames("friends-container", {
+    const containerClassname = classnames("friends-container", {
       disabled: isFetching
     })
 
-    content = <div className={containterClassname}>{friends.map((friend) => (
+    content = <div className={containerClassname}>{friends.map((friend) => (
       <FriendEntry key={friend.id} friend={friend} />
     ))
     }</div>
