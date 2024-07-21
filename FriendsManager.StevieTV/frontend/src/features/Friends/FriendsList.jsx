@@ -11,17 +11,42 @@ import "./FriendsList.css"
 
 import { useGetFriendsQuery } from "../api/apiSlice.js"
 
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1] ?  name.split(' ')[1][0] : ""}`,
+  };
+}
 
 let FriendEntry = ({ friend }) => {
   return (
     <React.Fragment>
-      <Box sx={{ maxWidth: 475 }}>
-        <Card variant="outlined">
+      <Box className="friend-entry">
+        <Card 
+          variant="outlined" 
+          className="friend-card" 
+          sx={"border-radius: 10px"}>
           <CardHeader
             avatar={
-              <Avatar>
-                {friend.name.substring(0, 1)}
-              </Avatar>
+              <Avatar {...stringAvatar(friend.name) } />
             }
             title={friend.name}
           />
@@ -31,7 +56,7 @@ let FriendEntry = ({ friend }) => {
               <dd>{friend.lastContactDate}</dd>
               <dt>Last Contact Type</dt>
               <dd>{friend.lastContactType}</dd>
-              <dt>Desired Contact Frequency</dt>
+              <dt>Contact Frequency</dt>
               <dd>{friend.desiredContactFrequency}</dd>
               <dt>Category</dt>
               <dd>{friend.category.name}</dd>

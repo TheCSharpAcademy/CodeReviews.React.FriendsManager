@@ -12,3 +12,21 @@ dd {
   grid-column-start: 2;
   text-align: start;
 }
+
+.friends-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+}
+
+.friend-entry {
+  max-width: 20%;
+  min-width: 300px;
+  padding: 10px;
+  margin: auto;
+}
+
+.friend-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

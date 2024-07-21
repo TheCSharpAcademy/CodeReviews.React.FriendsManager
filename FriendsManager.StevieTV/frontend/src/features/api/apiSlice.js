@@ -13,7 +13,10 @@ export const apiSlice = createApi({
       providesTags: (result = []) => [
         'Friend',
         ...result.map(({ id }) => ({ type: 'Friend', id }))
-      ]
+      ],
+      transformResponse: (response) => {
+        return response.sort((a, b) => a.name.localeCompare(b.name));
+      }
     }),
     addNewFriend: build.mutation({
       query: (newFriend) => ({
