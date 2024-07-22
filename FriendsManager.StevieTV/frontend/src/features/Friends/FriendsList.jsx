@@ -42,8 +42,9 @@ let FriendEntry = ({ friend }) => {
       <Box className="friend-entry">
         <Card 
           variant="outlined" 
-          className="friend-card" 
-          sx={"border-radius: 10px"}>
+          className="friend-card"
+          sx={{borderRadius: 5}}
+        >
           <CardHeader
             avatar={
               <Avatar {...stringAvatar(friend.name) } />

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 
 import App from "./App"
 import { store } from "./app/store.js"
-import "./index.css"
+import "./App.css"
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
