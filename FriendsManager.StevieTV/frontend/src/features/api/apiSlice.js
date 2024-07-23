@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
-  reducerPath: "api",
-  baseQuery: fetchBaseQuery({ 
-    baseUrl: "https://localhost:7285/api" 
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://localhost:7285/api'
   }),
   // Tag types are used for caching and invalidation.
   tagTypes: ['Friend', 'Category'],
@@ -26,21 +26,21 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Friend'],
       onQueryStarted(arg, api) {
-        console.log(arg)
+        console.log(arg);
       }
     }),
     getCategories: build.query({
       query: () => '/Categories',
       providesTags: (result = []) => [
         'Category',
-        ...result.map(({ id }) => ({ type: 'Category', id}))
+        ...result.map(({ id }) => ({ type: 'Category', id }))
       ]
-    }),
-  }),
-})
+    })
+  })
+});
 
-export const { 
+export const {
   useGetFriendsQuery,
   useAddNewFriendMutation,
-  useGetCategoriesQuery,
-} = apiSlice
+  useGetCategoriesQuery
+} = apiSlice;

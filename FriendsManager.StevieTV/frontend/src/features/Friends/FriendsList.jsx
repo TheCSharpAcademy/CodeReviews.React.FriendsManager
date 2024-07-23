@@ -1,26 +1,27 @@
-import "./FriendsList.css"
+import React from 'react';
+import classnames from 'classnames';
+import { useGetFriendsQuery } from 'features/api/apiSlice.js';
+import { AddFriendModal } from 'features/Friends/AddFriendModal.jsx';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 
-import Avatar from "@mui/material/Avatar"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardHeader from "@mui/material/CardHeader"
-import classnames from "classnames"
-import { useGetFriendsQuery } from "features/api/apiSlice.js"
-import React from "react"
-import { AddFriendModal } from "features/Friends/AddFriendModal.jsx"
+import './FriendsList.css';
 
 function stringToColor(string) {
   let hash = 0;
-  let i;
+  let i = 0;
 
   for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    hash = string.charCodeAt(i) + (hash * Math.pow(2,5));
+    hash = hash && hash;
   }
   let color = '#';
 
   for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
+    const value = Math.floor(hash / Math.pow(256, i)) % 256;
     color += `00${value.toString(16)}`.slice(-2);
   }
   return color;
@@ -29,24 +30,24 @@ function stringToColor(string) {
 function stringAvatar(name) {
   return {
     sx: {
-      bgcolor: stringToColor(name),
+      bgcolor: stringToColor(name)
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1] ?  name.split(' ')[1][0] : ""}`,
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1] ? name.split(' ')[1][0] : ''}`
   };
 }
 
-let FriendEntry = ({ friend }) => {
+const FriendEntry = ({ friend }) => {
   return (
     <React.Fragment>
       <Box className="friend-entry">
-        <Card 
-          variant="outlined" 
+        <Card
+          variant="outlined"
           className="friend-card"
-          sx={{borderRadius: 5}}
+          sx={{ borderRadius: 5 }}
         >
           <CardHeader
             avatar={
-              <Avatar {...stringAvatar(friend.name) } />
+              <Avatar {...stringAvatar(friend.name)} />
             }
             title={friend.name}
           />
@@ -65,8 +66,8 @@ let FriendEntry = ({ friend }) => {
         </Card>
       </Box>
     </React.Fragment>
-  )
-}
+  );
+};
 
 
 export const FriendsList = () => {
@@ -78,24 +79,24 @@ export const FriendsList = () => {
     isSuccess,
     isError,
     error
-  } = useGetFriendsQuery()
+  } = useGetFriendsQuery();
 
-  let content
+  let content = '' ;
 
   if (isLoading) {
-    content = "LOADING..."
+    content = 'LOADING...';
   } else if (isSuccess) {
 
-    const containerClassname = classnames("friends-container", {
+    const containerClassname = classnames('friends-container', {
       disabled: isFetching
-    })
+    });
 
-    content = <div className={containerClassname}>{friends.map((friend) => (
+    content = (<div className={containerClassname}>{friends.map((friend) => (
       <FriendEntry key={friend.id} friend={friend} />
     ))
-    }</div>
+    }</div>);
   } else if (isError) {
-    content = <div>{error.toString()}</div>
+    content = <div>{error.toString()}</div>;
   }
 
   return (
@@ -106,5 +107,5 @@ export const FriendsList = () => {
     </section>
     <AddFriendModal />
     </section>
-)
-}
+);
+};

@@ -1,16 +1,17 @@
-import { useGetCategoriesQuery } from "features/api/apiSlice"
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useGetCategoriesQuery } from 'features/api/apiSlice';
 
 export const Categories = () => {
 
   const {
     data: categories,
     isLoading: categoriesLoading
-  } = useGetCategoriesQuery()
-  
+  } = useGetCategoriesQuery();
+
   return (
     categoriesLoading ?
-      "Loading..." :
+      'Loading...' :
       <section className="categories-list">
         <h2>Categories</h2>
         {categories.map((category) => (
@@ -20,5 +21,5 @@ export const Categories = () => {
         ))
         }
       </section>
-  )
-}
+  );
+};
