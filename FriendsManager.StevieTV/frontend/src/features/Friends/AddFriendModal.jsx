@@ -1,13 +1,45 @@
 import AddIcon from '@mui/icons-material/Add';
 import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import Fab from "@mui/material/Fab"
+import { AddFriendForm } from "features/Friends/AddFriendForm.jsx"
+import { useState } from "react"
 
 export const AddFriendModal = () => {
+  const [formOpen, setFormOpen] = useState(false);
+  const handleClickOpen = () => {
+    setFormOpen(true);
+  };
+  const handleClose = () => {
+    setFormOpen(false);
+  };
+  
+  let addFriendForm = (
+      <Dialog
+        open={formOpen}
+        onClose={handleClose}
+        >
+        <DialogContent>
+          <AddFriendForm />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
+  );
+
+
   return (
-    <Box sx={{ '& > :not(style)': { m: 5, position: "fixed", top: 0, right: 0, zIndex: 2000 } }}>
-      <Fab color="secondary" aria-label="add">
-        <AddIcon />
-      </Fab>
-    </Box>  
+    <section>
+      <Box sx={{ "& > :not(style)": { m: 5, position: "fixed", top: 0, right: 0, zIndex: 2000 } }}>
+        <Fab color="secondary" aria-label="add" onClick={handleClickOpen}>
+          <AddIcon />
+        </Fab>
+      </Box>
+      {addFriendForm}
+    </section>
   )
 }
