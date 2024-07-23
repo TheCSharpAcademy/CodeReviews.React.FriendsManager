@@ -1,15 +1,13 @@
-import React, { useState } from "react"
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import { FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import dayjs from "dayjs";
-
-import { useAddNewFriendMutation, useGetCategoriesQuery } from "../api/apiSlice"
-import Button from '@mui/material/Button'
 import SendIcon from '@mui/icons-material/Send'
+import { FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import Box from "@mui/material/Box"
-
+import Button from '@mui/material/Button'
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from "dayjs";
+import { useAddNewFriendMutation, useGetCategoriesQuery } from "features/api/apiSlice"
+import { useState } from "react"
 
 export const AddFriendForm = () => {
   const [friendName, setFriendName] = useState('')

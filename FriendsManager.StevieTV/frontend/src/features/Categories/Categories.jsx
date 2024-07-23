@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from "../api/apiSlice"
+import { useGetCategoriesQuery } from "features/api/apiSlice"
 import { Link } from "react-router-dom"
 
 export const Categories = () => {

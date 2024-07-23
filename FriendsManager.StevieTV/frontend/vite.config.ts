@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,
+  },
+  resolve: {
+    alias: {
+      app: "/src/app",
+      features: "/src/features",
+    }
   }
 })

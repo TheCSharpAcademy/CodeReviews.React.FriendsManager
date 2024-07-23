@@ -1,15 +1,14 @@
-import React from "react"
-import classnames from "classnames"
+import "./FriendsList.css"
+
+import Avatar from "@mui/material/Avatar"
+import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardHeader from "@mui/material/CardHeader"
-import Avatar from "@mui/material/Avatar"
-import Box from "@mui/material/Box"
-
-import "./FriendsList.css"
-
-
-import { useGetFriendsQuery } from "../api/apiSlice.js"
+import classnames from "classnames"
+import { useGetFriendsQuery } from "features/api/apiSlice.js"
+import React from "react"
+import { AddFriendModal } from "features/Friends/AddFriendModal.jsx"
 
 function stringToColor(string) {
   let hash = 0;
@@ -100,9 +99,12 @@ export const FriendsList = () => {
   }
 
   return (
+    <section>
     <section className="friends-list">
       <h2>Friends</h2>
       {content}
     </section>
-  )
+    <AddFriendModal />
+    </section>
+)
 }
