@@ -33,8 +33,9 @@ export const FriendsList = () => {
 
         }
         {
-          isError &&
-          <div>{error.toString()}</div>
+          isError && (
+            <div>{error.status} - {error.error}</div>
+          )
         }
         {
           isSuccess && (

@@ -81,6 +81,7 @@ export const FriendEntry = ({ friend }) => {
               <Avatar {...stringAvatar(friend.name)} />
             }
             title={friend.name}
+            titleTypographyProps={{ fontSize: 20 }}
           />
           <CardContent>
             <dl>
