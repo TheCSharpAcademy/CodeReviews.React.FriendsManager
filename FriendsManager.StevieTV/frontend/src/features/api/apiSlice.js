@@ -18,16 +18,21 @@ export const apiSlice = createApi({
         return response.sort((a, b) => a.name.localeCompare(b.name));
       }
     }),
-    addNewFriend: build.mutation({
+    addFriend: build.mutation({
       query: (newFriend) => ({
         url: '/Friends',
         method: 'POST',
         body: newFriend
       }),
-      invalidatesTags: ['Friend'],
-      onQueryStarted(arg, api) {
-        console.log(arg);
-      }
+      invalidatesTags: ['Friend']
+    }),
+    editFriend: build.mutation({
+      query: (friend) => ({
+        url: `/Friends/${friend.id}`,
+        method: 'PUT',
+        body: friend
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Friend', id: arg.id }]
     }),
     getCategories: build.query({
       query: () => '/Categories',
@@ -41,6 +46,7 @@ export const apiSlice = createApi({
 
 export const {
   useGetFriendsQuery,
-  useAddNewFriendMutation,
+  useAddFriendMutation,
+  useEditFriendMutation,
   useGetCategoriesQuery
 } = apiSlice;

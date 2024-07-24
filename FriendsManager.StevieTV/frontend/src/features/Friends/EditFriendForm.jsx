@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-import { useAddFriendMutation, useGetCategoriesQuery } from 'features/api/apiSlice';
+import { useEditFriendMutation, useGetCategoriesQuery } from 'features/api/apiSlice';
 import SendIcon from '@mui/icons-material/Send';
 import { FormControl, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -9,14 +9,15 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-export const AddFriendForm = ({ handleClose }) => {
-  const [friendName, setFriendName] = useState('');
-  const [desiredContactFrequency, setDesiredContactFrequency] = useState(7);
-  const [lastContactDate, setLastContactDate] = useState(dayjs());
-  const [lastContactType, setLastContactType] = useState('');
-  const [category, setCategory] = useState('');
+export const EditFriendForm = ({ friend, handleClose }) => {
+  console.log(friend);
+  const [friendName, setFriendName] = useState(friend.name);
+  const [desiredContactFrequency, setDesiredContactFrequency] = useState(friend.desiredContactFrequency);
+  const [lastContactDate, setLastContactDate] = useState(dayjs(friend.lastContactDate, 'YYYY-MM-DD'));
+  const [lastContactType, setLastContactType] = useState(friend.lastContactType);
+  const [category, setCategory] = useState(friend.categoryId);
 
-  const [addFriend, { isLoading }] = useAddFriendMutation();
+  const [editFriend, { isLoading }] = useEditFriendMutation();
 
   const onFriendNameChanged = (e) => setFriendName(e.target.value);
   const onLastContactTypeChanged = (e) => setLastContactType(e.target.value);
@@ -25,23 +26,19 @@ export const AddFriendForm = ({ handleClose }) => {
 
   const canSave = [friendName, desiredContactFrequency, lastContactDate, lastContactType, category].every(Boolean);
 
-  const onAddFriendClicked = async() => {
+  const onEditFriendClicked = async() => {
     if (canSave) {
       try {
-        await addFriend({
+        await editFriend({
+          id: friend.id,
           name: friendName,
           desiredContactFrequency,
           lastContactDate: lastContactDate.format('YYYY-MM-DD'),
           lastContactType,
           categoryId: category
         }).unwrap();
-        setFriendName('');
-        setDesiredContactFrequency(7);
-        setLastContactDate(dayjs());
-        setLastContactType('');
-        setCategory('');
       } catch (err) {
-        console.log('failed to add friend', err);
+        console.log('failed to edit friend', err);
       } finally {
         handleClose();
       }
@@ -59,7 +56,7 @@ export const AddFriendForm = ({ handleClose }) => {
       'Loading...' :
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box component="section" sx={{ maxWidth: 300, margin: 5, gap: 2 }}>
-        <h2>Add a New Friend</h2>
+        <h2>Edit Friend</h2>
         <Stack
           component="form"
           sx={{
@@ -119,10 +116,10 @@ export const AddFriendForm = ({ handleClose }) => {
               ))}
             </Select>
           </FormControl>
-          <Button variant="contained" onClick={onAddFriendClicked}
+          <Button variant="contained" onClick={onEditFriendClicked}
             disabled={!canSave} endIcon={<SendIcon />}
           >
-            Add Friend
+            Edit Friend
           </Button>
         </Stack>
       </Box>

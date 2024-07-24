@@ -23,7 +23,9 @@ export const AddFriendModal = () => {
         onClose={handleClose}
       >
         <DialogContent>
-          <AddFriendForm />
+          <AddFriendForm
+            handleClose={handleClose}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
