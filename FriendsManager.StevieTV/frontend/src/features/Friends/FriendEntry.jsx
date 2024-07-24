@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
 import { EditFriendForm } from 'features/Friends/EditFriendForm';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 
 export const FriendEntry = ({ friend }) => {
   const [formOpen, setFormOpen] = useState(false);
+
   const handleClickOpen = () => {
     setFormOpen(true);
   };
@@ -21,15 +23,14 @@ export const FriendEntry = ({ friend }) => {
 
   function stringToColor(string) {
     let hash = 0;
-    let i = 0;
 
-    for (i = 0; i < string.length; i += 1) {
+    for (let i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + (hash * Math.pow(2, 5));
       hash = hash && hash;
     }
     let color = '#';
 
-    for (i = 0; i < 3; i += 1) {
+    for (let i = 0; i < 3; i += 1) {
       const value = Math.floor(hash / Math.pow(256, i)) % 256;
       color += `00${value.toString(16)}`.slice(-2);
     }
@@ -44,6 +45,8 @@ export const FriendEntry = ({ friend }) => {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1] ? name.split(' ')[1][0] : ''}`
     };
   }
+
+  const isOverdue =dayjs(friend.lastContactDate, 'YYYY-MM-DD').add(friend.desiredContactFrequency, 'day').isBefore(dayjs().startOf('day'));
 
   const editFriendForm = (
     <Dialog
@@ -69,7 +72,10 @@ export const FriendEntry = ({ friend }) => {
         <Card
           variant="outlined"
           className="friend-card"
-          sx={{ borderRadius: 5 }}
+          sx={[
+            { borderRadius: 5 },
+            isOverdue && { borderColor: 'Red' }
+          ]}
         >
           <CardHeader
             avatar={
