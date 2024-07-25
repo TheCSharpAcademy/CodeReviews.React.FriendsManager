@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-import { useEditFriendMutation, useDeleteFriendMutation, useGetCategoriesQuery } from 'features/api/apiSlice';
-import SendIcon from '@mui/icons-material/Send';
+import { useDeleteFriendMutation, useEditFriendMutation, useGetCategoriesQuery } from 'features/api/apiSlice';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SendIcon from '@mui/icons-material/Send';
 import {
   DialogContentText,
   DialogTitle,
@@ -16,12 +16,12 @@ import {
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Dialog from '@mui/material/Dialog';
 
 export const EditFriendForm = ({ friend, handleClose }) => {
   const [friendName, setFriendName] = useState(friend.name);
@@ -30,8 +30,8 @@ export const EditFriendForm = ({ friend, handleClose }) => {
   const [lastContactType, setLastContactType] = useState(friend.lastContactType);
   const [category, setCategory] = useState(friend.categoryId);
 
-  const [editFriend, { isLoading }] = useEditFriendMutation();
-  const [deleteFriend, { isDeleting }] = useDeleteFriendMutation();
+  const [editFriend] = useEditFriendMutation();
+  const [deleteFriend] = useDeleteFriendMutation();
 
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const handleDeleteClickOpen = () => {
@@ -68,7 +68,7 @@ export const EditFriendForm = ({ friend, handleClose }) => {
     }
   };
 
-  const onDeleteFriendConfirmed = async () => {
+  const onDeleteFriendConfirmed = async() => {
     try {
       await deleteFriend({
         id: friend.id
@@ -156,7 +156,7 @@ export const EditFriendForm = ({ friend, handleClose }) => {
             Edit Friend
           </Button>
           <Button variant="contained" onClick={handleDeleteClickOpen}
-            disabled={!canSave} endIcon={<DeleteForeverIcon/>}
+            disabled={!canSave} endIcon={<DeleteForeverIcon />}
             color="error"
           >
             Delete Friend
