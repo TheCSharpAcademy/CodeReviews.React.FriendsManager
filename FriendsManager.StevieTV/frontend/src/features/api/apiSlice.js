@@ -34,6 +34,13 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: (result, error, arg) => [{ type: 'Friend', id: arg.id }]
     }),
+    deleteFriend: build.mutation({
+      query: (friend) => ({
+        url: `/Friends/${friend.id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Friend', id: arg.id }]
+    }),
     getCategories: build.query({
       query: () => '/Categories',
       providesTags: (result = []) => [
@@ -56,6 +63,7 @@ export const {
   useGetFriendsQuery,
   useAddFriendMutation,
   useEditFriendMutation,
+  useDeleteFriendMutation,
   useGetCategoriesQuery,
   useAddCategoryMutation
 } = apiSlice;
