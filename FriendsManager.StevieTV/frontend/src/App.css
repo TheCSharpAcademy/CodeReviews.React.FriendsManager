@@ -109,3 +109,7 @@ nav a:hover {
 .navLinks a {
   margin-left: 5px;
 }
+
+.error {
+  color: #d32f2f;
+}

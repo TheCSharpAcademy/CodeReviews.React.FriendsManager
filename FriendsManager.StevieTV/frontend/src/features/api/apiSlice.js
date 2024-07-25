@@ -40,6 +40,14 @@ export const apiSlice = createApi({
         'Category',
         ...result.map(({ id }) => ({ type: 'Category', id }))
       ]
+    }),
+    addCategory: build.mutation({
+      query: (newCategory) => ({
+        url: '/Categories',
+        method: 'POST',
+        body: newCategory
+      }),
+      invalidatesTags: ['Category']
     })
   })
 });
@@ -48,5 +56,6 @@ export const {
   useGetFriendsQuery,
   useAddFriendMutation,
   useEditFriendMutation,
-  useGetCategoriesQuery
+  useGetCategoriesQuery,
+  useAddCategoryMutation
 } = apiSlice;

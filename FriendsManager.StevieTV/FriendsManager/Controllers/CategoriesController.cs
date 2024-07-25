@@ -80,6 +80,11 @@ namespace FriendsManager.Controllers
         [HttpPost]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
+
+            if (_context.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower()))
+            {
+                return BadRequest("Category Already Exists");
+            }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 

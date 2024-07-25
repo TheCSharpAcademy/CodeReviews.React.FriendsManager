@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useGetCategoriesQuery } from 'features/api/apiSlice';
+import { AddCategoryModal } from 'features/Categories/AddCategoryModal.jsx';
 
 export const Categories = () => {
 
@@ -20,6 +21,7 @@ export const Categories = () => {
           </li>
         ))
         }
+        <AddCategoryModal />
       </section>
   );
 };
