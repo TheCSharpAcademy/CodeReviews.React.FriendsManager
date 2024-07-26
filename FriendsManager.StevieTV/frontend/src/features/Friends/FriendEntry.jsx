@@ -13,7 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 
 export const FriendEntry = ({ friend }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const [isOverdue] = useState(dayjs(friend.lastContactDate, 'YYYY-MM-DD').add(friend.desiredContactFrequency, 'day').isBefore(dayjs().startOf('day')));
+  const isOverdue = dayjs(friend.lastContactDate, 'YYYY-MM-DD').add(friend.desiredContactFrequency, 'day').isBefore(dayjs().startOf('day'));
 
   const handleClickOpen = () => {
     setFormOpen(true);

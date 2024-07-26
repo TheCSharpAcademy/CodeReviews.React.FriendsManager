@@ -8,10 +8,9 @@ import Button from '@mui/material/Button';
 export const AddCategoryForm = ({ handleClose }) => {
   const [categoryName, setCategoryName] = useState('');
 
-  const [addCategory, { isLoading }] = useAddCategoryMutation();
+  const [addCategory] = useAddCategoryMutation();
   const [error, setError] = useState('' );
-
-  const onCategoryNameChanged = (e) => setCategoryName(e.target.value);
+    const onCategoryNameChanged = (e) => setCategoryName(e.target.value);
 
   const canSave = [categoryName].every(Boolean);
 
@@ -22,15 +21,13 @@ export const AddCategoryForm = ({ handleClose }) => {
           name: categoryName
         }).unwrap();
         setCategoryName('');
+        console.log('calling handle close');
+        handleClose();
       } catch (err) {
         console.log('failed to add category', err);
         setError(err.data);
-      } finally {
-        if (error !== '') {
-          handleClose();
         }
       }
-    }
   };
 
   return (

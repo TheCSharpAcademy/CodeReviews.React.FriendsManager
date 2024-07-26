@@ -25,11 +25,11 @@ export const FriendsList = () => {
     disabled: isFetching
   });
 
+
   return (
     <section>
       <section className="friends-list">
         <h2>Friends</h2>
-
         {
           isLoading &&
           'Loading...'

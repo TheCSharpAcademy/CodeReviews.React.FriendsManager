@@ -113,3 +113,27 @@ nav a:hover {
 .error {
   color: #d32f2f;
 }
+
+.categories-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categories-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.categories-list-link {
+  min-width: 200px;
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+}
+
+.categories-list-button {
+  margin-left: 20px;
+}

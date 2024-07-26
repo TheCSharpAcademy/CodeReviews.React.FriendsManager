@@ -16,7 +16,7 @@ export const AddFriendForm = ({ handleClose }) => {
   const [lastContactType, setLastContactType] = useState('');
   const [category, setCategory] = useState('');
 
-  const [addFriend, { isLoading }] = useAddFriendMutation();
+  const [addFriend] = useAddFriendMutation();
 
   const onFriendNameChanged = (e) => setFriendName(e.target.value);
   const onLastContactTypeChanged = (e) => setLastContactType(e.target.value);

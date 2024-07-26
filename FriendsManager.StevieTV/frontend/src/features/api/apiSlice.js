@@ -46,7 +46,10 @@ export const apiSlice = createApi({
       providesTags: (result = []) => [
         'Category',
         ...result.map(({ id }) => ({ type: 'Category', id }))
-      ]
+      ],
+      transformResponse: (response) => {
+        return response.sort((a, b) => a.name.localeCompare(b.name));
+      }
     }),
     addCategory: build.mutation({
       query: (newCategory) => ({
@@ -55,6 +58,13 @@ export const apiSlice = createApi({
         body: newCategory
       }),
       invalidatesTags: ['Category']
+    }),
+    deleteCategory: build.mutation({
+      query: (category) => ({
+        url: `/Categories/${category.id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Category', id: arg.id }]
     })
   })
 });
@@ -65,5 +75,6 @@ export const {
   useEditFriendMutation,
   useDeleteFriendMutation,
   useGetCategoriesQuery,
-  useAddCategoryMutation
+  useAddCategoryMutation,
+  useDeleteCategoryMutation
 } = apiSlice;

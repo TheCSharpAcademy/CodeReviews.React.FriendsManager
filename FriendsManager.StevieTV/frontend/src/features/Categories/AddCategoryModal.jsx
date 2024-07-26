@@ -9,26 +9,27 @@ import DialogContent from '@mui/material/DialogContent';
 import Fab from '@mui/material/Fab';
 
 export const AddCategoryModal = () => {
-  const [formOpen, setFormOpen] = useState(false);
-  const handleClickOpen = () => {
-    setFormOpen(true);
+  const [categoryFormOpen, setCategoryFormOpen] = useState(false);
+  const handleCategoryAddOpen = () => {
+    setCategoryFormOpen(true);
   };
-  const handleClose = () => {
-    setFormOpen(false);
+  const handleAddCategoryClose = () => {
+    console.log('handlingClose');
+    setCategoryFormOpen(false);
   };
 
   const addCategoryForm = (
       <Dialog
-        open={formOpen}
-        onClose={handleClose}
+        open={categoryFormOpen}
+        onClose={handleAddCategoryClose}
       >
         <DialogContent>
           <AddCategoryForm
-            handleClose={handleClose}
+            handleClose={handleAddCategoryClose}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleAddCategoryClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
   );
@@ -38,7 +39,7 @@ export const AddCategoryModal = () => {
     <section>
       <Box sx={{ '& > :not(style)': { m: 5, position: 'fixed', top: 0, right: 0, zIndex: 2000 } }}>
         <Fab color="secondary" aria-label="add"
-          onClick={handleClickOpen}
+          onClick={handleCategoryAddOpen}
         >
           <AddIcon />
         </Fab>

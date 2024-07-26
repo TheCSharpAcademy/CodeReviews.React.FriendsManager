@@ -60,6 +60,7 @@ export const EditFriendForm = ({ friend, handleClose }) => {
           lastContactType,
           categoryId: category
         }).unwrap();
+        console.log('editing friend', friend);
       } catch (err) {
         console.log('failed to edit friend', err);
       } finally {
