@@ -51,6 +51,9 @@ export const apiSlice = createApi({
         return response.sort((a, b) => a.name.localeCompare(b.name));
       }
     }),
+    getCategory: build.query({
+      query: (categoryId) => `/Categories/${categoryId}`
+    }),
     addCategory: build.mutation({
       query: (newCategory) => ({
         url: '/Categories',
@@ -75,6 +78,7 @@ export const {
   useEditFriendMutation,
   useDeleteFriendMutation,
   useGetCategoriesQuery,
+  useGetCategoryQuery,
   useAddCategoryMutation,
   useDeleteCategoryMutation
 } = apiSlice;
