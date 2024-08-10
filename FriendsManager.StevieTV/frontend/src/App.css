@@ -1,0 +1,139 @@
+:root {
+  --redux-color: #441b83;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+}
+
+
+p {
+  font-size: 1.1rem;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-float infinite 3s ease-in-out;
+  }
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-link {
+  color: rgb(112, 76, 182);
+}
+
+@keyframes App-logo-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+nav {
+  display: flex;
+  padding: 5px;
+  background: var(--redux-color);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+nav section {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+.navHeader {
+  color: white;
+  font-weight: 800;
+  font-style: normal;
+  font-size: calc(16px + 2vmin);
+}
+
+nav a,
+nav a:active {
+  font-weight: 700;
+  padding: 0.25rem 1.5rem;
+  border-radius: 5px;
+  color: white !important;
+  background: #8355cc;
+}
+
+nav a:hover {
+  color: white;
+  background: #926bcf;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navLinks {
+  display: flex;
+}
+
+.navLinks a {
+  margin-left: 5px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.categories-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categories-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.categories-list-link {
+  min-width: 200px;
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+}
+
+.categories-list-button {
+  margin-left: 20px;
+}
