@@ -6,7 +6,7 @@ import { Card, Stack } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import FriendForm from './FriendForm'
 import EditFriend from './editFriend'
-import { set } from '../../../../../../AppData/Local/Microsoft/TypeScript/5.2/node_modules/date-fns/set';
+import { set } from 'date-fns';
 
 const FriendList = () => {
     const dispatch = useDispatch()
