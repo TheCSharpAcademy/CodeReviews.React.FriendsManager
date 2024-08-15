@@ -59,3 +59,10 @@ export const updateClientFriendList = (categoryId)=> {
         payload: categoryId
     }
 }
+
+export const updateCategoriesInFriendList = (category) => {
+    return {
+        type: 'UPDATEFRIENDSCATEGORIES',
+        payload: category
+    }
+}

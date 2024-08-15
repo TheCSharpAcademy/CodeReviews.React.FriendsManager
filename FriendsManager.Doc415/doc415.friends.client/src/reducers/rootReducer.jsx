@@ -52,7 +52,8 @@ const friendsReducer = (state = [], action) => {
         case 'UPDATECLIENTLIST':
             return state.filter(friend=> friend.inCategory!==action.payload)
 
-
+        case 'UPDATEFRIENDSCATEGORIES':
+            return state.map(friend => friend.inCategory === action.payload.id ? {...friend, categoryName:action.payload.name}:friend)
         default:
             return state;
     }

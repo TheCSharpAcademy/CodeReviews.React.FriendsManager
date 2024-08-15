@@ -61,7 +61,7 @@ function CategoryForm({ updatingCategory, onCategoryUpdate }) {
                 setNewCategory('')
                 dispatch(updateCategory(fcategory))
                 setIsUpdating(false)
-                onCategoryUpdate()
+                onCategoryUpdate(fcategory)
             })
         }
 

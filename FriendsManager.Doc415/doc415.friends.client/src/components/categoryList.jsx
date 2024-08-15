@@ -1,27 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from 'react-bootstrap';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import CategoryForm from '../components/categoryForm'
-import {deleteCategory} from '../actions/actions'
+import { deleteCategory, updateCategoriesInFriendList } from '../actions/actions'
 
 const CategoryList = ({onChange}) => {
     const baseUrl = 'https://localhost:7016/api/fcategories/'
     const categories = useSelector(state => state.categories)
-    const [newName, setNewName] = useState('')
     const dispatch = useDispatch()
     const [selectedCategory,setSelectedCategory]=useState(undefined)
-    const handleNameChange = (event) => {
-        setNewName(event.target.value)
-    }
-
+   
     const handleUpdate = (category) => {
         setSelectedCategory(category)
         console.log('updating', category)
     }
 
-    const resetState = () => {
+    const resetState = (category) => {
         console.log('reseting state')
+        dispatch(updateCategoriesInFriendList(category))
         setSelectedCategory(undefined)
     }
 
