@@ -1,0 +1,200 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.listContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    justify-content: center;
+}
+
+.item {
+    width: 300px;
+    border-radius: 15px;
+    margin-right: 35px;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    border: solid;
+    border-width: 1px;
+    height: 330px;
+    background: rgb(255,252,247);
+    background: linear-gradient(180deg, rgba(255,252,247,1) 0%, rgba(243,209,222,1) 100%);
+    color: #746169;
+    
+}
+
+.listContainer::-webkit-scrollbar {
+    height: 2px;
+}
+
+.listContainer::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    width: 30px;
+}
+
+
+.topMenu {
+    justify-content: center;
+    margin-top: 50px;
+    height: 80px;
+    font-size: 16px;
+    color: #746169;
+}
+
+.dancingFont {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+}
+
+.contactButton {
+    border: none;
+    color: #9B3E73;
+    font-size: 28px;
+    opacity:0.7;
+}
+
+    .contactButton:hover {
+        text-shadow: 0 0 4px rgb(165,68,150);
+        opacity: 1
+    }
+
+p {
+    font-size: 16px
+}
+
+hr {
+    border: none;
+    height: 4px;
+    background-color: #746169;
+    width: 66%;
+    margin: 20px auto;
+}
+
+.form-label {
+    color: #746169;
+}
+
+.submitButton {
+    background: rgb(165,68,150);
+    background: linear-gradient(17deg, rgba(165,68,150,1) 0%, rgba(251,232,180,1) 100%);
+    font-size: 18px;
+    color: #fff2ee;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border: solid;
+    border-color: darkviolet;
+    border-width: thin;
+    border-radius: 4px;
+}
+
+    .submitButton span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+        font-weight: bold;
+    }
+
+        .submitButton span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .submitButton:hover span {
+        padding-right: 25px;
+    }
+
+        .submitButton:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+
+
+.loading {
+    display: block;
+    text-align: center;
+    color: #9B3F73;
+}
+
+.categoryButton {
+    border: none;
+    background-color: transparent;
+}
+
+.topMenuButton {
+    border: none;
+    background-color: transparent;
+}
+
+    .topMenuButton:hover {
+        text-shadow: 0 0 5px #847179;
+    }
+
+.addFriendButton {
+    border: none;
+    background-color: transparent;
+    opacity:0.6
+}
+
+    .addFriendButton:hover {
+        text-shadow: 0 0 1px rgb(165,68,150);
+        opacity: 0.8
+    }
+
+
+.handShakeImage{
+    opacity:0.3;
+}
+
+.modalBody {
+    background: rgb(229,184,216);
+    background: radial-gradient(circle, rgba(229,184,216,1) 3%, rgba(253,230,232,1) 100%);
+}
+
+.modalHeader {
+    background-color: #35BD9E;
+}
+
+.modalFooter {
+    background-color: #35BD9E;}
+
+.modalClose {
+    background-color: #35BD9E;
+    font-size:24px;
+    color:white;
+    border:none;
+}
+    .modalClose:hover {
+        color: #9B3E73;
+    }
+
+.startText {
+    color: #746169
+}
+
+.cardBody{
+    height: 90%;
+}
+
+.cardButtons {
+    border: none;
+    background-color: transparent;
+    opacity: 0.6;
+    font-size:20px;
+}
+    .cardButtons:hover {
+        text-shadow: 0 0 4px rgb(165,68,150);
+        opacity: 1
+    }
+
