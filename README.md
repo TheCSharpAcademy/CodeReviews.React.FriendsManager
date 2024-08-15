@@ -17,16 +17,12 @@ All actions are handled in a single page with many conditional renderings and ca
 Used techs:
 
 asp .net core
-
 react
-
 redux
-
 axios
-
 react-bootstrap
-
 mssql
+Ef
 
 
 
