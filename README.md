@@ -3,6 +3,7 @@ Friend Manager is a single page application to track your contacts with friends.
 
 +Change connection string in appsettings.json with your own connection string.                                                                      
 +Add migration and update your database.
+
 +Run "npm install" In the client directory.
 
 Run the application from VS , it will launch both server and client application.
