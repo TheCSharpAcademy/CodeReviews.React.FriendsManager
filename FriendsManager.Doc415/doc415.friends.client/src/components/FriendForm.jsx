@@ -73,14 +73,16 @@ const handleDateChange = (e) => {
         })
     }
 
-const handleIntervalChange = (e) => {
-    setFriendInterval(e.target.value)
-    setNewFriend({
-        ...newFriend,
-        minRecontactInDays: e.target.value
-    });
-    console.log(newFriend)
-};
+    const handleIntervalChange = (e) => {
+        if (e.target.value > 0) {
+            setFriendInterval(e.target.value)
+            setNewFriend({
+                ...newFriend,
+                minRecontactInDays: e.target.value
+            })
+        }
+    }
+
 
 const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value)
