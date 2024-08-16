@@ -13,7 +13,6 @@ const EditFriend = ({ friend, show,onClose }) => {
 
     useEffect(() => {
         setIsModalOn(show)
-        console.log(isModalOn, friend)
     }, [show]
 
     )

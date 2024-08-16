@@ -13,11 +13,9 @@ const CategoryList = ({onChange}) => {
    
     const handleUpdate = (category) => {
         setSelectedCategory(category)
-        console.log('updating', category)
     }
 
     const resetState = (category) => {
-        console.log('reseting state')
         dispatch(updateCategoriesInFriendList(category))
         setSelectedCategory(undefined)
     }
@@ -27,11 +25,9 @@ const CategoryList = ({onChange}) => {
         {
             axios.delete(`${baseUrl}${category.id}`).then(response => {
                 dispatch(deleteCategory(category.id))
-                console.log(response.data)
             })
                 .catch(error => console.log(error))
             onChange(category.id);
-
         }
                        
     }
@@ -53,7 +49,6 @@ const CategoryList = ({onChange}) => {
 
                             </tr>))}
                     </tbody>
-
                 </Table>
             </div>
         </>

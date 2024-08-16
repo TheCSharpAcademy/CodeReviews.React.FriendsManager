@@ -12,7 +12,6 @@ const FriendList = () => {
     const dispatch = useDispatch()
     const friends = useSelector(state => state.friends)
     const baseUrl = 'https://localhost:7016/api/friends/'
-    console.log(friends)
     const [addNewClicked, setAddNewClicked] = useState(false)
     const [selectedFriend, setSelectedFriend] = useState(undefined)
     const [toShow, setToShow] = useState(false)
@@ -63,10 +62,8 @@ const FriendList = () => {
                 day: '2-digit'
             }), lastContactMethod: latestContactMethod
         }
-        console.log(friend, updatedFriend)
         axios.put(`${baseUrl}${updatedFriend.id}`, updatedFriend)
             .then(response => {
-                console.log(response.data)
                 dispatch(updateFriend(response.data))
             }
             )
@@ -105,10 +102,10 @@ const FriendList = () => {
                             </Card.Body>
                             <Card.Footer >
                                 <Stack gap={5} direction="horizontal">
-                                    <button className="dancingFont contactButton" style={{ backgroundColor: 'transparent' }} onClick={() => handleContactFriend(friend)}><i class="bi bi-chat-quote"></i></button>
+                                    <button className="dancingFont contactButton" style={{ backgroundColor: 'transparent' }} onClick={() => handleContactFriend(friend)}><i className="bi bi-chat-quote"></i></button>
                                     <Stack gap={2} direction="horizontal">
-                                    <button className="cardButtons" onClick={() => handleEditFriend(friend)}><i class="bi bi-credit-card-2-front"></i></button>
-                                        <button className="cardButtons" onClick={() => handleDeleteFriend(friend.id)}><i class="bi bi-person-x"></i></button>
+                                    <button className="cardButtons" onClick={() => handleEditFriend(friend)}><i className="bi bi-credit-card-2-front"></i></button>
+                                        <button className="cardButtons" onClick={() => handleDeleteFriend(friend.id)}><i className="bi bi-person-x"></i></button>
                                     </Stack>
                                 </Stack>
                             </Card.Footer>

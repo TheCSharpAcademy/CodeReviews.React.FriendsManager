@@ -27,15 +27,12 @@ const FriendForm = ({ fromUpdate, onUpdate, updatingFriend, onAddComplete }) => 
     const [newFriend, setNewFriend] = useState(templateFriend)
     const dispatch = useDispatch()
     const categories = useSelector(state => state.categories)
-    const friends = useSelector(state => state.friends)
-    console.log(friends)
-    console.log(categories)
 
     useEffect(() => {
         if (isFromUpdate) {
             setNewFriend(updatingFriend)
             setFriendInterval(updatingFriend.minRecontactInDays)
-            setSelectedCategory(updatingFriend.inCategory) //bu degisecek , modele category id eklenecek buraya o alýnacak
+            setSelectedCategory(updatingFriend.inCategory) 
 
         } else {
             setNewFriend(templateFriend)
@@ -48,7 +45,6 @@ const FriendForm = ({ fromUpdate, onUpdate, updatingFriend, onAddComplete }) => 
     }, [])
 
 const handleNameChange = (e) => {
-    console.log(newFriend)
     const value = e.target.value;
     setNewFriend({
         ...newFriend,
@@ -57,7 +53,6 @@ const handleNameChange = (e) => {
 };
 
 const handleMethodChange = (e) => {
-    console.log(newFriend)
     const value = e.target.value;
     setNewFriend({
         ...newFriend,
@@ -88,31 +83,23 @@ const handleIntervalChange = (e) => {
 };
 
 const handleCategoryChange = (e) => {
-    console.log(e.target.value, 'category selected')
     setSelectedCategory(e.target.value)
     setNewFriend({
         ...newFriend,
         inCategory: e.target.value
     });
-    console.log(newFriend)
 };
 
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(newFriend)
     if (newFriend.inCategory === "" || newFriend.name === '' || newFriend.lastContactDate === '' || newFriend.minRecontactInDays === undefined || newFriend.lastContactMethod === '') { return }
 
     const { lastContactDate, ...friend } = newFriend
-    console.log(newFriend,friend)
  
-
-    console.log('Form Data Submitted:', friend);
-    console.log(fromUpdate)
     if (!isFromUpdate) {
         axios.post(baseUrl, friend)
             .then(response => {
-                console.log(response.data);
                 dispatch(addFriend(response.data))
             })
             .catch(error =>
@@ -121,7 +108,6 @@ const handleSubmit = (e) => {
     } else {
         axios.put(`${baseUrl}${friend.id}`, friend)
             .then(response => {
-                console.log(response.data);
                 dispatch(updateFriend(response.data))
             })
             .catch(error =>
@@ -132,10 +118,8 @@ const handleSubmit = (e) => {
     setSelectedCategory({ id: "-1", name: "" })
     setFriendInterval("")
     if (!isFromUpdate) {
-        console.log('trying to close add')
         onAddComplete()
     } else {
-        console.log('trying to close update')
         onUpdate()
     }
 };

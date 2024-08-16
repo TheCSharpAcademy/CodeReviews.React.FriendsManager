@@ -6,14 +6,12 @@ import { addCategory,updateCategory } from '../actions/actions'
 
 function CategoryForm({ updatingCategory, onCategoryUpdate }) {
 
-    console.log(onCategoryUpdate)
     const dispatch = useDispatch();
     const categories = useSelector(state => state.categories)
     const [newCategory, setNewCategory] = useState('')
     const baseUrl = 'https://localhost:7016/api/fcategories/'
     const [isUpdating, setIsUpdating] = useState(false);
     const [buttonText, setButtonText] = useState('Add');
-    console.log(updatingCategory)
 
     useEffect(() => {
         if (updatingCategory !== undefined) {
@@ -29,7 +27,6 @@ function CategoryForm({ updatingCategory, onCategoryUpdate }) {
 
     const handleNameChange = (event) => {
         setNewCategory(event.target.value)
-        console.log(newCategory)
     }
 
     const handleCategorySubmit = (event) => {
@@ -51,7 +48,6 @@ function CategoryForm({ updatingCategory, onCategoryUpdate }) {
         if (!isUpdating) {
             axios.post(baseUrl, fcategory).
                 then(response => {
-                    console.log('return from server', response.data)
                     setNewCategory('')
                     dispatch(addCategory(response.data))
                 })
@@ -64,11 +60,6 @@ function CategoryForm({ updatingCategory, onCategoryUpdate }) {
                 onCategoryUpdate(fcategory)
             })
         }
-
-       
-
-        console.log(newCategory)
-
     }
 
 

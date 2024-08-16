@@ -26,9 +26,9 @@ public class FriendService
         _context.Update(dbFriend);
         await _context.SaveChangesAsync();
 
-        friend.IsMissedContact = (DateTime.Parse(dbFriend.LastContact.ToString()) + TimeSpan.FromDays(dbFriend.MinRecontactInDays)) < DateTime.Now+TimeSpan.FromDays(1);
+        friend.IsMissedContact = (DateTime.Parse(dbFriend.LastContact.ToString()) + TimeSpan.FromDays(dbFriend.MinRecontactInDays)) < DateTime.Now + TimeSpan.FromDays(1);
         friend.DaysToNextContact = (DateTime.Parse(dbFriend.LastContact.ToString()) + TimeSpan.FromDays(dbFriend.MinRecontactInDays) - DateTime.Now).Days;
-        friend.CategoryName= dbFriend.InCategory.Name;
+        friend.CategoryName = dbFriend.InCategory.Name;
         return friend;
     }
 
@@ -56,9 +56,9 @@ public class FriendService
                 FormattedDate = newFriend.LastContact.ToString(),
                 MinRecontactInDays = newFriend.MinRecontactInDays,
                 InCategory = newFriend.InCategory.Id.ToString(),
-                CategoryName= newFriend.InCategory.Name,
+                CategoryName = newFriend.InCategory.Name,
                 LastContactMethod = newFriend.LastContactMethod,
-                IsMissedContact = (DateTime.Parse(newFriend.LastContact.ToString()) + TimeSpan.FromDays(newFriend.MinRecontactInDays)) < DateTime.Now+TimeSpan.FromDays(1),
+                IsMissedContact = (DateTime.Parse(newFriend.LastContact.ToString()) + TimeSpan.FromDays(newFriend.MinRecontactInDays)) < DateTime.Now + TimeSpan.FromDays(1),
                 DaysToNextContact = (newFriend.LastContact.ToDateTime(TimeOnly.MinValue) + TimeSpan.FromDays(newFriend.MinRecontactInDays) - DateTime.Now).Days
             };
             return newFriendDto;

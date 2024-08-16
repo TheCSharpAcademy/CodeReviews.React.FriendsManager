@@ -9,7 +9,7 @@ const categoriesReducer = (state = [], action) => {
         }
 
         case 'DELETECATEGORY':
-            return state.filter(category=> category.id!==action.payload);
+            return state.filter(category => category.id !== action.payload);
 
         case 'SET':
             {
@@ -18,8 +18,8 @@ const categoriesReducer = (state = [], action) => {
             }
 
         case 'UPDATECATEGORY':
-            {                console.log(action.payload)
-                return state.map(category => category.id === action.payload.id ? {...category, name:action.payload.name}:category)
+            {
+                return state.map(category => category.id === action.payload.id ? { ...category, name: action.payload.name } : category)
 
             }
 
@@ -32,28 +32,25 @@ const categoriesReducer = (state = [], action) => {
 const friendsReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADDFRIEND': {
-            console.log(action.payload)
             return [...state, action.payload]
         }
 
         case 'DELETEFRIEND': {
-            console.log(action.payload, 'deleted')
             return state.filter(friend => friend.id !== action.payload);
         }
 
         case 'UPDATEFRIEND': {
-            console.log(action.payload, 'updated')
-            return state.map(friend => friend.id !==  action.payload.id? friend: action.payload);
+            return state.map(friend => friend.id !== action.payload.id ? friend : action.payload);
         }
 
         case 'SETFRIENDS':
             return [...state, ...action.payload];
 
         case 'UPDATECLIENTLIST':
-            return state.filter(friend=> friend.inCategory!==action.payload)
+            return state.filter(friend => friend.inCategory !== action.payload)
 
         case 'UPDATEFRIENDSCATEGORIES':
-            return state.map(friend => friend.inCategory === action.payload.id ? {...friend, categoryName:action.payload.name}:friend)
+            return state.map(friend => friend.inCategory === action.payload.id ? { ...friend, categoryName: action.payload.name } : friend)
         default:
             return state;
     }

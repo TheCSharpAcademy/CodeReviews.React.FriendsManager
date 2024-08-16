@@ -42,18 +42,14 @@ function App() {
             setIsLoading(false)
 
         }).catch(error => console.log(error))
-        console.log(friendsFromServer)
 
     }, [])
 
     const handlePageChange = (isCategorySelected) => {
         setIsFriendsSelected(!isCategorySelected)
-        console.log(isFriendsSelected)
-        console.log(isCategorySelected)
     }
 
     const updateFriends = (id) => {
-        console.log('deleting friends from category')
         dispatch(updateClientFriendList(id))
     }
 
