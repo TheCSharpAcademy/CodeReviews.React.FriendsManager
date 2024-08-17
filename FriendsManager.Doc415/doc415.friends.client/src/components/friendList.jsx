@@ -98,7 +98,7 @@ const FriendList = () => {
                                         )
                                     }
                                     
-                                    <p sthle={{ color:'#746169'}}>Your last contact was with {friend.lastContactMethod}</p>
+                                    <p sthle={{ color:'#746169'}}>Your last contact was via {friend.lastContactMethod}</p>
                                 </div>
 
                             </Card.Body>
