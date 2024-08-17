@@ -86,14 +86,14 @@ const FriendList = () => {
                                 <div>
 
                                     {friend.daysToNextContact < 0 ?
-                                        (<p style={{ color: '#B44B75' }}>
+                                        (<p style={{ color: '#F47925' }}>
                                             You have missed your planned contact for {Math.abs(friend.daysToNextContact)} days!
                                         </p>)
                                         :
                                         (friend.daysToNextContact === 0 ?
-                                            <p style={{ color: 'blue' }}>You have planned contact today!</p>
+                                            <p style={{ color: '#6DBAEE' }}>You have planned contact today!</p>
                                             :
-                                            <p style={{ color: '#71D7B0' }}>You have {friend.daysToNextContact} days for planned contact
+                                            <p style={{ color: '#31BB9D' }}>You have {friend.daysToNextContact} days for next contact
                                             </p>
                                         )
                                     }
