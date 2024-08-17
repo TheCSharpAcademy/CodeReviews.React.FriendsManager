@@ -60,18 +60,36 @@ const handleMethodChange = (e) => {
     });
 };
 
-const handleDateChange = (e) => {
-    let formatDate = e.toLocaleString('tr-TR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    })
-    setNewFriend({
-        ...newFriend,
-        lastContactDate: e,
-        formattedDate: formatDate
-        })
+    const handleDateChange = (e) => {
+        const today = new Date();
+        const input=new Date(e)
+        if (today > input) {
+            let formatDate = e.toLocaleString('tr-TR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            })
+            setNewFriend({
+                ...newFriend,
+                lastContactDate: e,
+                formattedDate: formatDate
+            })
+        } else {
+            let formatDate = today.toLocaleString('tr-TR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            })
+            setNewFriend({
+                ...newFriend,
+                lastContactDate: today,
+                formattedDate: formatDate
+            })
+        }
+    
+        
     }
+    
 
     const handleIntervalChange = (e) => {
         if (e.target.value > 0) {

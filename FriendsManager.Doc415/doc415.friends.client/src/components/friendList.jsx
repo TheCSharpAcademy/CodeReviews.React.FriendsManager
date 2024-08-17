@@ -91,14 +91,16 @@ const FriendList = () => {
                                         </p>)
                                         :
                                         (friend.daysToNextContact === 0 ?
-                                            <p style={{ color: '#F16020' }}>You have planned contact today!</p>
+                                            <p style={{ color: 'blue' }}>You have planned contact today!</p>
                                             :
                                             <p style={{ color: '#71D7B0' }}>You have {friend.daysToNextContact} days for planned contact
                                             </p>
                                         )
                                     }
                                     
-                                    <p sthle={{ color:'#746169'}}>Your last contact was via {friend.lastContactMethod}</p>
+                                    <p style={{ color: '#746169' }}>
+                                        Your last contact was via <span style={{ color: '#9B3E73',fontWeight:600 }}> {friend.lastContactMethod} </span>
+                                    </p>
                                 </div>
 
                             </Card.Body>
