@@ -3,7 +3,7 @@ import { Stack, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { addCategory,updateCategory } from '../actions/actions'
-
+import categoryService from '../service/categoryService'
 function CategoryForm({ updatingCategory, onCategoryUpdate }) {
 
     const dispatch = useDispatch();
@@ -46,16 +46,28 @@ function CategoryForm({ updatingCategory, onCategoryUpdate }) {
 
         }
         if (!isUpdating) {
-            axios.post(baseUrl, fcategory).
-                then(response => {
+            categoryService.addCategory(fcategory)
+                .then(response => {
+                    if (response.status === 201) {
+                        dispatch(addCategory(response.data))
+                    }
+                    else {
+                        window.alert(`Unexpected response: ${response.status}`)
+                    }
                     setNewCategory('')
-                    dispatch(addCategory(response.data))
-                })
+                }
+                )
                 .catch(error => console.log(error))
         } else {
-            axios.put(`${baseUrl}${updatingCategory.id}`, fcategory).then(response=>{
+            categoryService.updateCategory(fcategory, updatingCategory.id).then(response=>{
+                if (response.status === 200) {
+                    dispatch(updateCategory(fcategory))
+                }
+                else
+                {
+                    window.alert(`Unexpected response: ${response.status}`)
+                }
                 setNewCategory('')
-                dispatch(updateCategory(fcategory))
                 setIsUpdating(false)
                 onCategoryUpdate(fcategory)
             })

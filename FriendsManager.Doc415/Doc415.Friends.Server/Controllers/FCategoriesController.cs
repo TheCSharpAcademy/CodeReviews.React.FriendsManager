@@ -74,7 +74,7 @@ namespace Doc415.Friends.Server.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/FCategories
@@ -109,7 +109,7 @@ namespace Doc415.Friends.Server.Controllers
                 }
                 _context.FCategories.Remove(fCategory);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return NoContent();
             }
             catch
             {

@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from 'react-bootstrap';
 import { useState } from 'react'
-import axios from 'axios'
 import CategoryForm from '../components/categoryForm'
 import { deleteCategory, updateCategoriesInFriendList } from '../actions/actions'
+import categoryService from '../service/categoryService'
 
 const CategoryList = ({onChange}) => {
-    const baseUrl = 'https://localhost:7016/api/fcategories/'
     const categories = useSelector(state => state.categories)
     const dispatch = useDispatch()
     const [selectedCategory,setSelectedCategory]=useState(undefined)
@@ -23,10 +22,15 @@ const CategoryList = ({onChange}) => {
     const handleDelete = (category) => {
         if (window.confirm(`This will delete ${category.name} category and all friends in this category. Are you sure? `))
         {
-            axios.delete(`${baseUrl}${category.id}`).then(response => {
-                dispatch(deleteCategory(category.id))
+            categoryService.deleteCategory(category.id).then(response => {
+                if (response.status === 204) {
+                    dispatch(deleteCategory(category.id))
+                }
+                else {
+                    window.alert(`unexpeted response:${response.status}`)
+                }
             })
-                .catch(error => console.log(error))
+                .catch(error => window.alert(error))
             onChange(category.id);
         }
                        
