@@ -91,7 +91,7 @@ namespace Doc415.Friends.Server.Controllers
         {
             var guidId = Guid.Parse(id);
             Friend friend = await _context.Friends.FindAsync(guidId);
-            if (friend == null)
+            if (friend is null)
             {
                 return NotFound();
             }

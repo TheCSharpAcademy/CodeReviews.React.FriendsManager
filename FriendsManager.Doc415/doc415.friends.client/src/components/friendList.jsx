@@ -1,17 +1,15 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteFriend, updateFriend } from '../actions/actions'
-import axios from 'axios'
 import { Card, Stack } from 'react-bootstrap';
 import { useState, useEffect } from 'react'
 import FriendForm from './FriendForm'
 import EditFriend from './editFriend'
-import { set } from 'date-fns';
+import friendService from '../service/friendService'
 
 const FriendList = () => {
     const dispatch = useDispatch()
     const friends = useSelector(state => state.friends)
-    const baseUrl = 'https://localhost:7016/api/friends/'
     const [addNewClicked, setAddNewClicked] = useState(false)
     const [selectedFriend, setSelectedFriend] = useState(undefined)
     const [toShow, setToShow] = useState(false)
@@ -44,7 +42,14 @@ const FriendList = () => {
 
     const handleDeleteFriend = (id) => {
         if (window.confirm('This will delete selected friend. Are you sure?')) {
-            axios.delete(`${baseUrl}${id}`).then(dispatch(deleteFriend(id))).catch(error => console.log(error))
+            friendService.deleteFriend(id)
+                .then(response => {
+                    if (response.status === 204) {
+                        dispatch(deleteFriend(id))
+                    }
+                })
+
+                .catch(error => window.alert(error))
         }
     }
 
@@ -62,14 +67,19 @@ const FriendList = () => {
                 month: '2-digit',
                 day: '2-digit'
             }), daysToNextContact: friend.MinRecontactInDays
-            ,   lastContactMethod: latestContactMethod
+            , lastContactMethod: latestContactMethod
         }
-        axios.put(`${baseUrl}${updatedFriend.id}`, updatedFriend)
+        friendService.updateFriend(updatedFriend)
             .then(response => {
-                dispatch(updateFriend(response.data))
+                if (response.status === 201) {
+                    dispatch(updateFriend(response.data))
+                }
+                else {
+                    window.alert(`Unexpected response status: ${response.status}`);
+                }
             }
             )
-            .catch(error => console.log(error))
+            .catch(error => window.alert(error))
     }
 
 
@@ -99,9 +109,9 @@ const FriendList = () => {
                                             </p>
                                         )
                                     }
-                                    
+
                                     <p style={{ color: '#746169' }}>
-                                        Your last contact was via <span style={{ color: '#9B3E73',fontWeight:600 }}> {friend.lastContactMethod} </span>
+                                        Your last contact was via <span style={{ color: '#9B3E73', fontWeight: 600 }}> {friend.lastContactMethod} </span>
                                     </p>
                                 </div>
 
@@ -110,7 +120,7 @@ const FriendList = () => {
                                 <Stack gap={5} direction="horizontal">
                                     <button className="dancingFont contactButton" style={{ backgroundColor: 'transparent' }} onClick={() => handleContactFriend(friend)}><i className="bi bi-chat-quote"></i></button>
                                     <Stack gap={2} direction="horizontal">
-                                    <button className="cardButtons" onClick={() => handleEditFriend(friend)}><i className="bi bi-credit-card-2-front"></i></button>
+                                        <button className="cardButtons" onClick={() => handleEditFriend(friend)}><i className="bi bi-credit-card-2-front"></i></button>
                                         <button className="cardButtons" onClick={() => handleDeleteFriend(friend.id)}><i className="bi bi-person-x"></i></button>
                                     </Stack>
                                 </Stack>

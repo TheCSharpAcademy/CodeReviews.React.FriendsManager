@@ -76,7 +76,7 @@ public class FriendService
     {
         try
         {
-            var friends = await _context.Friends.Include(f => f.InCategory).ToListAsync();
+            var friends = await _context.Friends.AsNoTracking().Include(f => f.InCategory).ToListAsync();
             var friendsDTOList = new List<FriendDTO>();
             foreach (var friend in friends)
             {
