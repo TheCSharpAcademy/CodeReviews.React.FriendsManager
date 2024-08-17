@@ -55,12 +55,14 @@ const FriendList = () => {
 
     const handleContactFriend = (friend) => {
         let latestContactMethod = window.prompt('Enter contact method', 'Telephone')
+        let newContactDate = new Date()
         let updatedFriend = {
-            ...friend, formattedDate: (new Date()).toLocaleString('tr-TR', {
+            ...friend, formattedDate: newContactDate.toLocaleString('tr-TR', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
-            }), lastContactMethod: latestContactMethod
+            }), daysToNextContact: friend.MinRecontactInDays
+            ,   lastContactMethod: latestContactMethod
         }
         axios.put(`${baseUrl}${updatedFriend.id}`, updatedFriend)
             .then(response => {

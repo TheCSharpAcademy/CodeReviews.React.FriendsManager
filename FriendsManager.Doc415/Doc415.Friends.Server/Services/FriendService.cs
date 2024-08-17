@@ -28,6 +28,8 @@ public class FriendService
 
         friend.IsMissedContact = (DateTime.Parse(dbFriend.LastContact.ToString()) + TimeSpan.FromDays(dbFriend.MinRecontactInDays)) < DateTime.Now + TimeSpan.FromDays(1);
         friend.DaysToNextContact = (DateTime.Parse(dbFriend.LastContact.ToString()) + TimeSpan.FromDays(dbFriend.MinRecontactInDays) - DateTime.Now).Days;
+        if (friend.DaysToNextContact == 0)
+            friend.DaysToNextContact = friend.MinRecontactInDays;
         friend.CategoryName = dbFriend.InCategory.Name;
         return friend;
     }
