@@ -7,8 +7,9 @@ import FriendList from './components/friendList'
 import { setCategoriesFromServer, setFriends, updateClientFriendList } from './actions/actions'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 import { CircleLoader } from 'react-spinners'
+import friendService from './service/friendService'
+import categoryService from './service/categoryService'
 
 function App() {
     const dispatch = useDispatch()
@@ -29,19 +30,22 @@ function App() {
 
     useEffect(() => {
         let categoriesFromServer = []
-        axios.get('https://localhost:7016/api/FCategories').then(response => {
-            categoriesFromServer = response.data
-            dispatch(setCategoriesFromServer(categoriesFromServer))
-            setIsLoading(false)
+        categoryService.getCategories().then(response => {
+            if (response.status === 200) {
+                categoriesFromServer = response.data
+                dispatch(setCategoriesFromServer(categoriesFromServer))
+                setIsLoading(false)
+            }
+        }).catch(error => window.alert(error))
 
-        }).catch(error => console.log(error))
         let friendsFromServer = []
-        axios.get('https://localhost:7016/api/Friends').then(response => {
-            friendsFromServer = response.data
-            dispatch(setFriends(friendsFromServer))
-            setIsLoading(false)
-
-        }).catch(error => console.log(error))
+        friendService.getFriends().then(response => {
+            if (response.status === 200) {
+                friendsFromServer = response.data
+                dispatch(setFriends(friendsFromServer))
+                setIsLoading(false)
+            }
+        }).catch(error => window.alert(error))
 
     }, [])
 
@@ -62,7 +66,7 @@ function App() {
             <div className="main">
                 {isLoading ?
                     <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
-                        <CircleLoader size='150'/>
+                        <CircleLoader size='150' />
                     </div>
                     :
                     <>
