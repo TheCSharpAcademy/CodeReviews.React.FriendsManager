@@ -5,6 +5,7 @@ using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FriendsDbContext>(options =>
-  options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+  options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<IFriendsRepository, FriendsRepository>();
 builder.Services.AddScoped<IRepository<Category>, Repository<Category>>();
 builder.Services.AddScoped<IFriendsService, FriendsService>();

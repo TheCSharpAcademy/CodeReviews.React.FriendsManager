@@ -1,0 +1,19 @@
+@Doc415.Friends.Server_HostAddress = https://localhost:7016
+
+GET {{Doc415.Friends.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST https://localhost:7016//api/Friends
+Content-Type: application/json
+
+{
+  formattedDate:"07/08/2024"
+id:""
+lastContactDate:"07/08/2024"
+minRecontactInDays:"2"
+name:"2"
+}
+
+###
